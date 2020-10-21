@@ -21,13 +21,11 @@ def index():
 
 @app.route('/complete/<id>', methods=['GET'])
 def completed(id):
-    form = TodoForm()
     item = get_item(id)
     item['status'] = 'Completed'
     save_item(item)
-    tasks = get_items()
 
-    return render_template('index.html', tasks=tasks, form=form)
+    return redirect ('/')
 
 
 if __name__ == '__main__':

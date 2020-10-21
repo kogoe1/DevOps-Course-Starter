@@ -38,6 +38,10 @@
             <td>{{task.status}}</td> 
             <td></td>
             <td>{{task.title}}</td> 
+            <td></td>
+            {% if task.status != 'Completed' %}
+            <td><a class="btn btn-success" href="{{ url_for('completed', id=task.id) }}" role="button">Mark as Completed</a></td>
+            {% endif %}
           </tr>
           {% endfor %}
         </table>

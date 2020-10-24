@@ -1,5 +1,5 @@
 
-from flask import Flask, url_for, render_template, redirect, flash, request
+from flask import Flask, render_template, redirect, request
 from todo_app.flask_config import Config
 from todo_app.data.forms import *
 from todo_app.data.session_items import *
@@ -8,6 +8,8 @@ from todo_app.data.session_items import *
 app = Flask(__name__)
 app.config.from_object(Config)
 
+def taskSort(item):
+    return item['status']
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -16,7 +18,7 @@ def index():
     if form.validate_on_submit():
         title = request.form['title']
         add_item(title)
-
+    tasks.sort(reverse=True, key=taskSort)
     return render_template('index.html', tasks=tasks, form=form)
 
 @app.route('/complete/<id>', methods=['GET'])
@@ -26,6 +28,7 @@ def completed(id):
     save_item(item)
 
     return redirect ('/')
+
 
 
 if __name__ == '__main__':

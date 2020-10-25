@@ -30,6 +30,7 @@
       <h2>Items</h2>
       <ul class="list-group mb-4">
         <table>
+          <th></th>
           <th>ID</th>
           <th></th>
           <th>STATUS</th>
@@ -37,6 +38,7 @@
           <th>TITLE</th>
           {% for task in tasks %}
           <tr>
+            <td><a class="btn btn-secondary btn-sm" href="{{ url_for('remove_task', id=task.id) }}" role="button">Remove</a></td>
             <td>{{task.id}}</td> 
             <td></td>
             <td>{{task.status}}</td> 

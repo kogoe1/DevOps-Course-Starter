@@ -29,6 +29,12 @@ def completed(id):
 
     return redirect ('/')
 
+@app.route('/remove/<id>', methods=['GET'])
+def remove_task(id):
+    item = get_item(id)
+    remove_item(item)
+
+    return redirect ('/')
 
 
 if __name__ == '__main__':

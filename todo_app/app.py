@@ -49,8 +49,7 @@ def completed(id):
 
 @app.route('/remove/<id>', methods=['GET'])
 def remove_task(id):
-    item = get_item(id)
-    remove_item(item)
+    trello_util.delete_card(id)
 
     return redirect ('/')
 

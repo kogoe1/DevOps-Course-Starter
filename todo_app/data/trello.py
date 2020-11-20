@@ -56,6 +56,14 @@ class TrelloUtility:
         }
         return self.api_call('POST', self.CARDS_URL, query)
 
+    def delete_card(self, card_id) -> Response:
+        url = self.CARDS_URL + card_id
+        query = {
+            'key': self.key,
+            'token': self.token,
+        }
+        return self.api_call('DELETE', url, query)
+
     def get_status(self, list_id) -> str:
         list_name = self.list_id_and_name_map[list_id]
         if list_name == 'To Do':

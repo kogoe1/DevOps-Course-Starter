@@ -35,15 +35,14 @@ def index_form():
     form = TodoForm()
     if form.validate_on_submit():
         title = request.form['title']
-        trello_util.add_card(title, list_id=trello_util.get_list_id('Not Started'))
+        list_id=trello_util.get_list_id(trello_util.STATUS_NOT_STARTED)
+        trello_util.add_card(title, list_id)
 
     return redirect('/')            
 
 @app.route('/complete/<id>', methods=['GET'])
 def completed(id):
-    item = get_item(id)
-    item['status'] = 'Completed'
-    save_item(item)
+    trello_util.update_card(id, trello_util.STATUS_COMPLETED)
 
     return redirect ('/')
 

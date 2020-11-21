@@ -31,11 +31,9 @@ class Item:
         self._status = status
 
     @property
-    def list_id(self):
-        return self._list_id
+    def description(self):
+        return self._description
 
-    @list_id.setter
-    def list_id(self, list_id):
-        self._list_id = list_id    
-
-
+    @description.setter
+    def description(self, description):
+        self._description = description    

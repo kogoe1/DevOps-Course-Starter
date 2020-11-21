@@ -3,15 +3,18 @@ from requests.models import Response
 
 class TrelloUtility:
     """ Consider making BOARD_ID dynamic"""
-    BOARD_ID = "5fb51906cc7d395b1b145b0e" 
-    member_url = "https://api.trello.com/1/members/me/boards?fields=name,url"
-    BOARDS_URL = "https://api.trello.com/1/boards/" + BOARD_ID
+    BOARD_ID = "5fb51906cc7d395b1b145b0e"
+    BOARDS_URL = "https://api.trello.com/1/members/me/boards"
+    BOARD_URL = "https://api.trello.com/1/boards/" + BOARD_ID
     CARDS_URL = "https://api.trello.com/1/cards/"
+    STATUS_NOT_STARTED = "Not Started"
+    STATUS_IN_PROGRESS = "In Progress"
+    STATUS_COMPLETED = "Completed"
     list_id_and_name_map = {}
 
     def __init__(self, api_key, token):
         self.key = api_key
-        self.token = token
+        self.token = token  
 
         lists = self.get_lists().json()['lists']
         for list in lists:
@@ -19,14 +22,21 @@ class TrelloUtility:
             list_name = list['name']
             self.list_id_and_name_map[list_id] = list_name
 
-
     def api_call(self, method, url, query) -> Response:
         response = requests.request(
             method,
             url,
             params=query
         )
+        return response
 
+    def api_call_with_header(self, method, url, headers, query) -> Response:
+        response = requests.request(
+            method,
+            url,
+            headers=headers,
+            params=query
+        )
         return response
 
     def get_lists(self) -> Response:
@@ -36,7 +46,7 @@ class TrelloUtility:
             'fields': 'name',
             'lists': 'all'
          }
-         return self.api_call("GET", self.BOARDS_URL, query)
+         return self.api_call("GET", self.BOARD_URL, query)
 
     def get_cards(self) -> Response:
         query = {
@@ -45,7 +55,7 @@ class TrelloUtility:
             'fields': 'name',
             'cards': 'all'
         }
-        return self.api_call('GET', self.BOARDS_URL, query)
+        return self.api_call('GET', self.BOARD_URL, query)
 
     def add_card(self, name, list_id) -> Response:
         query = {
@@ -64,14 +74,27 @@ class TrelloUtility:
         }
         return self.api_call('DELETE', url, query)
 
+    def update_card(self, card_id, status) -> Response:
+        url = self.CARDS_URL + card_id
+        list_id = self.get_list_id(status)
+        query = {
+            'key': self.key,
+            'token': self.token,
+            'idList': list_id
+        }
+        headers = {
+            'Accept': 'application/json'
+        }
+        return self.api_call_with_header('PUT', url, headers, query)    
+
     def get_status(self, list_id) -> str:
         list_name = self.list_id_and_name_map[list_id]
         if list_name == 'To Do':
-            return "Not Started" 
+            return self.STATUS_NOT_STARTED 
         elif list_name == 'Doing':
-            return "In Progress"
+            return self.STATUS_IN_PROGRESS
         elif list_name == 'Done':
-            return "Completed"
+            return self.STATUS_COMPLETED
         else: 
             return  "No Status"                     
 
@@ -82,9 +105,9 @@ class TrelloUtility:
                 return list_id
 
     def get_list_name_from_status(self, status) -> str:
-        if status == 'Not Started':
+        if status == self.STATUS_NOT_STARTED:
             return "To Do"
-        if status == 'In Progress':
+        if status == self.STATUS_IN_PROGRESS:
             return "Doing"
-        if status == 'Completed':
+        if status == self.STATUS_COMPLETED:
             return "Done"

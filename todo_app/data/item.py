@@ -1,8 +1,9 @@
 class Item:
     
-    def __init__(self, id, title, status):
+    def __init__(self, id, title, description, status):
         self._id = id
         self._title = title
+        self._description = description
         self._status = status
 
 

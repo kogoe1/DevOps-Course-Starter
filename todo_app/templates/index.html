@@ -16,6 +16,10 @@
             {{ form.title.label }}<br>
             {{ form.title(size=60) }}
         </p>
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description(size=60) }}
+        </p>
         <p>{{ form.submit() }}</p>
       </form>
     </div>
@@ -35,6 +39,8 @@
           <th></th>
           <th>TITLE</th>
           <th></th>
+          <th>DESCRIPTION</th>
+          <th></th>
           <th>STATUS</th>
           {% for task in tasks %}
           <tr>
@@ -43,10 +49,15 @@
             <td></td>
             <td>{{task.title}}</td> 
             <td></td>
+            <td>{{task.description}}</td> 
+            <td></td>
             <td>{{task.status}}</td> 
             <td></td>
             {% if task.status != 'Completed' %}
             <td><a class="btn btn-success" href="{{ url_for('completed', id=task.id) }}" role="button">Mark as Completed</a></td>
+            {% endif %}
+            {% if task.status == 'Completed' %}
+            <td><a class="btn btn-light" href="{{ url_for('not_started', id=task.id) }}" role="button">Back to Not Started</a></td>
             {% endif %}
           </tr>
           {% endfor %}

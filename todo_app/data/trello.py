@@ -1,5 +1,7 @@
+from typing import List
 import requests
 from requests.models import Response
+from todo_app.data.item import Item
 
 class TrelloUtility:
     """ Consider making BOARD_ID dynamic"""
@@ -47,26 +49,40 @@ class TrelloUtility:
             'lists': 'all'
          }
          return self.api_call("GET", self.BOARD_URL, query)
-
-    def get_cards(self) -> Response:
+    
+    def get_items(self) -> List[Item]:
         query = {
             'key': self.key,
             'token': self.token,
             'fields': 'name',
             'cards': 'all'
         }
-        return self.api_call('GET', self.BOARD_URL, query)
+        json_response = self.api_call('GET', self.BOARD_URL, query).json()
+        
+        items = []
+        cards = json_response['cards']
+        for item in cards:
+            id = item['id']
+            title = item['name']
+            list_id = item['idList']
+            description = item['desc']
+            status = self.get_status(list_id)
+            items.append(Item(id, title, description, status))
 
-    def add_card(self, name, list_id) -> Response:
+        return items    
+
+    def add_item(self, name, description) -> Response:
+        list_id = self.get_list_id(self.STATUS_NOT_STARTED)
         query = {
             'key': self.key,
             'token': self.token,
             'name': name,
-            'idList': list_id
+            'idList': list_id,
+            'desc': description
         }
         return self.api_call('POST', self.CARDS_URL, query)
 
-    def delete_card(self, card_id) -> Response:
+    def delete_item(self, card_id) -> Response:
         url = self.CARDS_URL + card_id
         query = {
             'key': self.key,
@@ -74,7 +90,7 @@ class TrelloUtility:
         }
         return self.api_call('DELETE', url, query)
 
-    def update_card(self, card_id, status) -> Response:
+    def update_item(self, card_id, status) -> Response:
         url = self.CARDS_URL + card_id
         list_id = self.get_list_id(status)
         query = {

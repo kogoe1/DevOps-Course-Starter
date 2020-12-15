@@ -7,7 +7,7 @@ from todo_app.data.trello import TrelloUtility
 
 app = Flask(__name__)
 app.config.from_object(Config)
-trello_util = TrelloUtility(TrelloConfig.TRELLO_API_KEY, TrelloConfig.TRELLO_TOKEN)
+trello_util = TrelloUtility(TrelloConfig.TRELLO_API_KEY, TrelloConfig.TRELLO_TOKEN, TrelloConfig.BOARD_ID)
 
 def taskSort(item):
     return item.status

@@ -12,3 +12,4 @@ class TrelloConfig:
     """ Configuration values for Trello API """    
     TRELLO_API_KEY=os.environ.get('TRELLO_API_KEY')
     TRELLO_TOKEN=os.environ.get('TRELLO_TOKEN')    
+    BOARD_ID=os.environ.get('BOARD_ID')    

@@ -4,19 +4,17 @@ from requests.models import Response
 from todo_app.data.item import Item
 
 class TrelloUtility:
-    """ Consider making BOARD_ID dynamic"""
-    BOARD_ID = "5fb51906cc7d395b1b145b0e"
-    BOARDS_URL = "https://api.trello.com/1/members/me/boards"
-    BOARD_URL = "https://api.trello.com/1/boards/" + BOARD_ID
+    BOARD_URL = "https://api.trello.com/1/boards/"
     CARDS_URL = "https://api.trello.com/1/cards/"
     STATUS_NOT_STARTED = "Not Started"
     STATUS_IN_PROGRESS = "In Progress"
     STATUS_COMPLETED = "Completed"
     list_id_and_name_map = {}
 
-    def __init__(self, api_key, token):
+    def __init__(self, api_key, token, board_id):
         self.key = api_key
-        self.token = token  
+        self.token = token 
+        self.BOARD_URL = self.BOARD_URL + board_id
 
         lists = self.get_lists().json()['lists']
         for list in lists:

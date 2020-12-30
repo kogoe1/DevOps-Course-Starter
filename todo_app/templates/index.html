@@ -42,7 +42,7 @@
           <th>DESCRIPTION</th>
           <th></th>
           <th>STATUS</th>
-          {% for task in tasks %}
+          {% for task in view_model.items %}
           <tr>
             <td><a class="btn btn-secondary btn-sm" href="{{ url_for('remove_task', id=task.id) }}" role="button">Remove</a></td>
             <td>{{task.id}}</td> 

@@ -1,8 +1,10 @@
 
+from todo_app.data.model import ViewModel
 from flask import Flask, render_template, redirect, request
 from todo_app.flask_config import Config, TrelloConfig
 from todo_app.data.forms import TodoForm
 from todo_app.data.trello import TrelloUtility
+from todo_app.data.model import ViewModel
 
 
 app = Flask(__name__)
@@ -18,7 +20,8 @@ def index():
     items = trello_util.get_items()
     items.sort(reverse=True, key=taskSort)  
     
-    return render_template('index.html', tasks=items, form=form)
+    item_view_model = ViewModel(items)
+    return render_template('index.html', view_model=item_view_model, form=form)
 
 @app.route('/', methods=['POST'])
 def index_form():

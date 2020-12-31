@@ -31,7 +31,7 @@
   <p></p>
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
+      <h2>Items Not Started</h2>
       <ul class="list-group mb-4">
         <table>
           <th></th>
@@ -41,8 +41,7 @@
           <th></th>
           <th>DESCRIPTION</th>
           <th></th>
-          <th>STATUS</th>
-          {% for task in view_model.items %}
+          {% for task in view_model.todo_items %}
           <tr>
             <td><a class="btn btn-secondary btn-sm" href="{{ url_for('remove_task', id=task.id) }}" role="button">Remove</a></td>
             <td>{{task.id}}</td> 
@@ -51,18 +50,60 @@
             <td></td>
             <td>{{task.description}}</td> 
             <td></td>
-            <td>{{task.status}}</td> 
-            <td></td>
-            {% if task.status != 'Completed' %}
-            <td><a class="btn btn-success" href="{{ url_for('completed', id=task.id) }}" role="button">Mark as Completed</a></td>
-            {% endif %}
-            {% if task.status == 'Completed' %}
-            <td><a class="btn btn-light" href="{{ url_for('not_started', id=task.id) }}" role="button">Back to Not Started</a></td>
-            {% endif %}
+            <td><a class="btn btn-primary" href="{{ url_for('in_progress', id=task.id) }}" role="button">Move to In Progress</a></td>
           </tr>
           {% endfor %}
         </table>
-        
+      </ul>
+
+      <h2>In Progress Items</h2>
+      <ul class="list-group mb-4">
+        <table>
+          <th></th>
+          <th>Trello ID</th>
+          <th></th>
+          <th>TITLE</th>
+          <th></th>
+          <th>DESCRIPTION</th>
+          <th></th>
+          {% for task in view_model.in_progress_items %}
+          <tr>
+            <td><a class="btn btn-secondary btn-sm" href="{{ url_for('remove_task', id=task.id) }}" role="button">Remove</a></td>
+            <td>{{task.id}}</td> 
+            <td></td>
+            <td>{{task.title}}</td> 
+            <td></td>
+            <td>{{task.description}}</td> 
+            <td></td>
+            <td><a class="btn btn-success" href="{{ url_for('completed', id=task.id) }}" role="button">Mark as Completed</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </ul>
+
+      <h2>Completed Items</h2>
+      <ul class="list-group mb-4">
+        <table>
+          <th></th>
+          <th>Trello ID</th>
+          <th></th>
+          <th>TITLE</th>
+          <th></th>
+          <th>DESCRIPTION</th>
+          <th></th>
+          {% for task in view_model.completed_items %}
+          <tr>
+            <td><a class="btn btn-secondary btn-sm" href="{{ url_for('remove_task', id=task.id) }}" role="button">Remove</a></td>
+            <td>{{task.id}}</td> 
+            <td></td>
+            <td>{{task.title}}</td> 
+            <td></td>
+            <td>{{task.description}}</td> 
+            <td></td>
+            <td><a class="btn btn-light" href="{{ url_for('not_started', id=task.id) }}" role="button">Back to Not Started</a></td>
+          </tr>
+          {% endfor %}
+        </table>
       </ul>
     </div>
   </div>

@@ -33,6 +33,12 @@ def index_form():
 
     return redirect('/')            
 
+@app.route('/in_progress/<id>', methods=['GET'])
+def in_progress(id):
+    trello_util.update_item(id, trello_util.STATUS_IN_PROGRESS)
+
+    return redirect ('/')
+
 @app.route('/complete/<id>', methods=['GET'])
 def completed(id):
     trello_util.update_item(id, trello_util.STATUS_COMPLETED)

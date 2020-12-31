@@ -64,8 +64,9 @@ class TrelloUtility:
             title = item['name']
             list_id = item['idList']
             description = item['desc']
+            last_activity_date = item['dateLastActivity']
             status = self.get_status(list_id)
-            items.append(Item(id, title, description, status))
+            items.append(Item(id, title, description, status, last_activity_date))
 
         return items    
 

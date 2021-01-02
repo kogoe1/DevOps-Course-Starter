@@ -91,7 +91,7 @@
           <th></th>
           <th>DESCRIPTION</th>
           <th></th>
-          {% for task in view_model.completed_items %}
+          {% for task in view_model.show_all_done_items%}
           <tr>
             <td><a class="btn btn-secondary btn-sm" href="{{ url_for('remove_task', id=task.id) }}" role="button">Remove</a></td>
             <td>{{task.id}}</td> 
@@ -103,6 +103,35 @@
             <td><a class="btn btn-light" href="{{ url_for('not_started', id=task.id) }}" role="button">Back to Not Started</a></td>
           </tr>
           {% endfor %}
+          
+          {% if view_model.total_completed_items > 5%}
+          </table>
+          <details>
+            <summary>Older Completed Items</summary>
+                <p>
+                  <table>
+                    <th></th>
+                    <th>Trello ID</th>
+                    <th></th>
+                    <th>TITLE</th>
+                    <th></th>
+                    <th>DESCRIPTION</th>
+                    <th></th>
+                  {% for task in view_model.older_done_items%}
+                    <tr>
+                      <td><a class="btn btn-secondary btn-sm" href="{{ url_for('remove_task', id=task.id) }}" role="button">Remove</a></td>
+                      <td>{{task.id}}</td> 
+                      <td></td>
+                      <td>{{task.title}}</td> 
+                      <td></td>
+                      <td>{{task.description}}</td> 
+                      <td></td>
+                      <td><a class="btn btn-light" href="{{ url_for('not_started', id=task.id) }}" role="button">Back to Not Started</a></td>
+                    </tr>
+                  {% endfor %}
+                </p>
+            </details>
+          {% endif %}
         </table>
       </ul>
     </div>

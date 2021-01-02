@@ -32,6 +32,11 @@ class ViewModel:
     @property
     def completed_items(self):
         return self.get_completed_items()
+
+    @property
+    def total_completed_items(self):
+        number_completed_items = len(self.get_completed_items())
+        return number_completed_items   
     
     
     @property
@@ -39,7 +44,7 @@ class ViewModel:
         items_to_show = []
         completed_items = self.get_completed_items()
 
-        if len(completed_items) < 6:
+        if len(completed_items) < 5:
             items_to_show = completed_items
         else:
             items_to_show = self.recent_done_items  

@@ -4,17 +4,21 @@
 {% block content %}
   <div class="jumbotron">
     <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
+    <p class="lead">Just another to-do app with Trello API Storage</p>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Add New TODO Item</h2>
-      <form action="" method="post" novalidate>
+      <h2>Add New TO-DO Item</h2>
+      <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
             {{ form.title.label }}<br>
             {{ form.title(size=60) }}
+        </p>
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description(size=60) }}
         </p>
         <p>{{ form.submit() }}</p>
       </form>
@@ -31,22 +35,29 @@
       <ul class="list-group mb-4">
         <table>
           <th></th>
-          <th>ID</th>
-          <th></th>
-          <th>STATUS</th>
+          <th>Trello ID</th>
           <th></th>
           <th>TITLE</th>
+          <th></th>
+          <th>DESCRIPTION</th>
+          <th></th>
+          <th>STATUS</th>
           {% for task in tasks %}
           <tr>
             <td><a class="btn btn-secondary btn-sm" href="{{ url_for('remove_task', id=task.id) }}" role="button">Remove</a></td>
             <td>{{task.id}}</td> 
             <td></td>
-            <td>{{task.status}}</td> 
-            <td></td>
             <td>{{task.title}}</td> 
+            <td></td>
+            <td>{{task.description}}</td> 
+            <td></td>
+            <td>{{task.status}}</td> 
             <td></td>
             {% if task.status != 'Completed' %}
             <td><a class="btn btn-success" href="{{ url_for('completed', id=task.id) }}" role="button">Mark as Completed</a></td>
+            {% endif %}
+            {% if task.status == 'Completed' %}
+            <td><a class="btn btn-light" href="{{ url_for('not_started', id=task.id) }}" role="button">Back to Not Started</a></td>
             {% endif %}
           </tr>
           {% endfor %}

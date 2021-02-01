@@ -1,5 +1,5 @@
-from todo_app import app
 from dotenv import load_dotenv, find_dotenv
+from todo_app import app
 import pytest
 import requests
 

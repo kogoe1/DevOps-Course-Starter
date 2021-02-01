@@ -12,7 +12,6 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     
-    #app = create_app()
     trello_util = TrelloUtility(TrelloConfig.TRELLO_API_KEY, TrelloConfig.TRELLO_TOKEN, TrelloConfig.BOARD_ID)
 
     def taskSort(item):

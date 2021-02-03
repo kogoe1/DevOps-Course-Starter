@@ -16,11 +16,14 @@ class TrelloUtility:
         self.token = token 
         self.BOARD_URL = self.BOARD_URL + board_id
 
-        lists = self.get_lists().json()['lists']
-        for list in lists:
-            list_id = list['id']
-            list_name = list['name']
-            self.list_id_and_name_map[list_id] = list_name
+
+    def check_and_initialise_list_id_and_name_map(self):
+        if len(self.list_id_and_name_map) == 0:
+            lists = self.get_lists().json()['lists']
+            for list in lists:
+                list_id = list['id']
+                list_name = list['name']
+                self.list_id_and_name_map[list_id] = list_name
 
     def api_call(self, method, url, query) -> Response:
         response = requests.request(
@@ -103,6 +106,8 @@ class TrelloUtility:
         return self.api_call_with_header('PUT', url, headers, query)    
 
     def get_status(self, list_id) -> str:
+        self.check_and_initialise_list_id_and_name_map() 
+
         list_name = self.list_id_and_name_map[list_id]
         if list_name == 'To Do':
             return self.STATUS_NOT_STARTED 
@@ -114,6 +119,8 @@ class TrelloUtility:
             return  "No Status"                     
 
     def get_list_id(self, status) -> str:
+        self.check_and_initialise_list_id_and_name_map() 
+
         list_id_and_name_pair_list = self.list_id_and_name_map.items()
         for list_id, name in list_id_and_name_pair_list:
             if name == self.get_list_name_from_status(status):

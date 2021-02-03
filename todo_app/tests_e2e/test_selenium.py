@@ -1,6 +1,6 @@
 import os
 import pytest
-from todo_app import app
+from todo_app import app, data
 from threading import Thread
 from todo_app.flask_config import TrelloConfig
 import requests
@@ -17,7 +17,7 @@ TOKEN=TrelloConfig.TRELLO_TOKEN
 def test_app():
     # Create the new board & update the board id environment variable 
     board_id = create_trello_board()
-    # os.environ['TRELLO_BOARD_ID'] = board_id
+
     os.environ['BOARD_ID'] = board_id
 
     # construct the new application
@@ -93,10 +93,38 @@ def driver():
 def test_task_journey(driver, test_app): 
     driver.get('http://localhost:5000/')
 
-    # element = driver.find_element_by_name('title')
-    # element.clear()
-    # element.send_keys("Add test to do item")
-    # element.send_keys(Keys.RETURN)
+    # Add a to do item
+    test_item = "Add test to do item"
+    todo_title = driver.find_element_by_name('title')
+    todo_title.clear()
+    todo_title.send_keys(test_item)
+    todo_title.send_keys(Keys.RETURN)
+    web_page_data =  driver.page_source
+    assert test_item in web_page_data
+    assert driver.title == 'To-Do App'
+    assert "Move to In Progress" in web_page_data    
+    assert "Mark as Completed" not in web_page_data    
 
-    assert driver.title == 'To-Do App'        
+    # Move test item to in progress
+    move_to_in_progress_button = driver.find_element_by_xpath('//a[@class="btn btn-primary"][contains(., "Move to In Progress")]')
+    move_to_in_progress_button.click()
+    web_page_data =  driver.page_source
+    assert "Mark as Completed" in web_page_data 
+    assert "Move to In Progress" not in web_page_data    
+    
+    # Move test item as complete
+    mark_as_complete_button = driver.find_element_by_xpath('//a[@class="btn btn-success"][contains(., "Mark as Completed")]')
+    mark_as_complete_button.click()
+    web_page_data =  driver.page_source
+    assert "Mark as Completed" not in web_page_data 
+    assert "Back to Not Started" in web_page_data    
+   
+    # Move test item Back to Not Started
+    back_to_not_started_button = driver.find_element_by_xpath('//a[@class="btn btn-light"][contains(., "Back to Not Started")]')
+    back_to_not_started_button.click()
+    web_page_data =  driver.page_source
+    assert "Back to Not Started" not in web_page_data    
+    assert "Move to In Progress" in web_page_data 
+
+            
        

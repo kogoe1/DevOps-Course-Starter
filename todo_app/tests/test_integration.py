@@ -27,17 +27,13 @@ def test_move_to_in_prgress(monkeypatch, client):
 
 
 def test_index_page(monkeypatch, client):
-
-    # monkeypatch.setattr(TrelloUtility, "get_items", MockedTrelloUtility.get_items)
     monkeypatch.setattr(requests, "request", MockedRequests.request)
     response = client.get("/")
 
-    assert response != None
     assert response.status == '200 OK'
     response_data = str(response.data)
     assert "To-Do App" in response_data
     assert "Add item descriptions" in response_data
-    # assert "Should fail" in response_data
 
 def test_move_back_to_not_started(monkeypatch, client):
     monkeypatch.setattr(requests, "request", MockedRequests.request)

@@ -6,13 +6,19 @@ from todo_app.data.forms import TodoForm
 from todo_app.data.trello import TrelloUtility
 from todo_app.data.model import ViewModel
 
+import os
+
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    TRELLO_API_KEY=os.environ.get('TRELLO_API_KEY')
+    TRELLO_TOKEN=os.environ.get('TRELLO_TOKEN')    
+    BOARD_ID=os.environ.get('BOARD_ID')  
     
-    trello_util = TrelloUtility(TrelloConfig.TRELLO_API_KEY, TrelloConfig.TRELLO_TOKEN, TrelloConfig.BOARD_ID)
+    trello_util = TrelloUtility(TRELLO_API_KEY, TRELLO_TOKEN, BOARD_ID)
 
     def taskSort(item):
         return item.status

@@ -1,7 +1,7 @@
 
 from todo_app.data.model import ViewModel
 from flask import Flask, render_template, redirect, request
-from todo_app.flask_config import Config, TrelloConfig
+# from todo_app.flask_config import Config, TrelloConfig
 from todo_app.data.forms import TodoForm
 from todo_app.data.trello import TrelloUtility
 from todo_app.data.model import ViewModel
@@ -12,7 +12,9 @@ import os
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+
+    app.config.from_object('todo_app.flask_config.Config')
+    
 
     TRELLO_API_KEY=os.environ.get('TRELLO_API_KEY')
     TRELLO_TOKEN=os.environ.get('TRELLO_TOKEN')    

@@ -1,17 +1,17 @@
 import os
 import pytest
-from todo_app import app, data
-from threading import Thread
-from todo_app.flask_config import TrelloConfig
 import requests
 
+from todo_app import app, data
+from threading import Thread
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 BOARD_URL = "https://api.trello.com/1/boards/"
 BOARDS_URL = "https://api.trello.com/1/members/me/boards?fields=name,url"
-KEY=TrelloConfig.TRELLO_API_KEY
-TOKEN=TrelloConfig.TRELLO_TOKEN
+
+KEY=os.environ.get('TRELLO_API_KEY')
+TOKEN=os.environ.get('TRELLO_TOKEN') 
 
 @pytest.fixture(scope='module')
 def test_app():
@@ -43,7 +43,7 @@ def create_trello_board():
     'name': new_board_name
     }
 
-    response = requests.request(
+    create_test_board_response = requests.request(
     "POST",
     url,
     params=query
@@ -54,19 +54,17 @@ def create_trello_board():
    'token': TOKEN
     }
 
-    response1 = requests.request(
+    get_boards_response = requests.request(
     "GET",
     BOARDS_URL,
     params=query
     )
 
-    boards = response1.json()
+    boards = get_boards_response.json()
 
     for board in boards:
         if board['name'] == new_board_name:
-            return board['id']
-        # else:
-        #     return ""    
+            return board['id']   
 
       
 def delete_trello_board(board_id):
@@ -95,10 +93,12 @@ def test_task_journey(driver, test_app):
 
     # Add a to do item
     test_item = "Add test to do item"
+
     todo_title = driver.find_element_by_name('title')
     todo_title.clear()
     todo_title.send_keys(test_item)
     todo_title.send_keys(Keys.RETURN)
+
     web_page_data =  driver.page_source
     assert test_item in web_page_data
     assert driver.title == 'To-Do App'
@@ -125,6 +125,3 @@ def test_task_journey(driver, test_app):
     web_page_data =  driver.page_source
     assert "Back to Not Started" not in web_page_data    
     assert "Move to In Progress" in web_page_data 
-
-            
-       

@@ -2,6 +2,7 @@ from dotenv import load_dotenv, find_dotenv
 from todo_app import app
 import pytest
 import requests
+import os
 
 from todo_app.tests.test_request import MockedRequests
 
@@ -19,9 +20,10 @@ def client():
 
 
 
-def test_move_to_in_prgress(monkeypatch, client):  
+def test_move_to_in_prgress(monkeypatch, client): 
+    TODO_ITEM_ID=os.environ.get('TODO_ITEM_ID') 
     monkeypatch.setattr(requests, "request", MockedRequests.request)
-    response = client.get('/in_progress/5fb9923734e1420b507bc75e')
+    response = client.get('/in_progress/' + TODO_ITEM_ID)
 
     assert response.status == '302 FOUND'
 
@@ -36,20 +38,23 @@ def test_index_page(monkeypatch, client):
     assert "Add item descriptions" in response_data
 
 def test_move_back_to_not_started(monkeypatch, client):
+    COMPLETED_ITEM_ID=os.environ.get('COMPLETED_ITEM_ID')
     monkeypatch.setattr(requests, "request", MockedRequests.request)
-    response = client.get("/not_started/5fb9924c9da5330af79e095c")
+    response = client.get("/not_started/" + COMPLETED_ITEM_ID)
 
     assert response.status == '302 FOUND'
 
 def test_move_to_completed(monkeypatch, client):
+    IN_PROGTESS_ITEM_ID=os.environ.get('IN_PROGTESS_ITEM_ID')
     monkeypatch.setattr(requests, "request", MockedRequests.request)
-    response = client.get("/complete/5fb9923734e1420b507bc75e")
+    response = client.get("/complete/" + IN_PROGTESS_ITEM_ID)
 
     assert response.status == '302 FOUND'
 
 def test_delete_item(monkeypatch, client):
+    REMOVE_ITEM_ID=os.environ.get('REMOVE_ITEM_ID')
     monkeypatch.setattr(requests, "request", MockedRequests.request)
-    response = client.get("/remove/5fb9923734e1420b507bc75e")
+    response = client.get("/remove/" + REMOVE_ITEM_ID)
 
     assert response.status == '302 FOUND'
       

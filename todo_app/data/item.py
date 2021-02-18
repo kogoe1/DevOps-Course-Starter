@@ -1,11 +1,5 @@
 class Item:
     
-    # def __init__(self, id, title, description, status):
-    #     self._id = id
-    #     self._title = title
-    #     self._description = description
-    #     self._status = status
-    
     def __init__(self, id, title, description, status, last_activity_date):
         self._id = id
         self._title = title
@@ -49,7 +43,3 @@ class Item:
     @property
     def last_activity_date(self):
         return self._last_activity_date
-
-    # @description.setter
-    # def last_activity_date(self, last_activity_date):
-    #     self._last_activity_date = last_activity_date

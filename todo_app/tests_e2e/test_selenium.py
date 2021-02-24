@@ -4,11 +4,20 @@ import requests
 
 from todo_app import app, data
 from threading import Thread
+
+from dotenv import load_dotenv, find_dotenv
+
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 BOARD_URL = "https://api.trello.com/1/boards/"
 BOARDS_URL = "https://api.trello.com/1/members/me/boards?fields=name,url"
+
+file_path = find_dotenv('.env')
+load_dotenv(file_path, override=True)
 
 KEY=os.environ.get('TRELLO_API_KEY')
 TOKEN=os.environ.get('TRELLO_TOKEN') 
@@ -91,7 +100,7 @@ def driver():
 def test_task_journey(driver, test_app): 
     driver.get('http://localhost:5000/')
 
-    # Add a to do item
+    # Add a todo item
     test_item = "Add test to do item"
 
     todo_title = driver.find_element_by_name('title')
@@ -99,8 +108,12 @@ def test_task_journey(driver, test_app):
     todo_title.send_keys(test_item)
     todo_title.send_keys(Keys.RETURN)
 
+    driver.implicitly_wait(30)
+
+
+    assert driver.find_element_by_xpath('//td[contains(., "' + test_item + '")]') is not None
+    
     web_page_data =  driver.page_source
-    assert test_item in web_page_data
     assert driver.title == 'To-Do App'
     assert "Move to In Progress" in web_page_data    
     assert "Mark as Completed" not in web_page_data    
@@ -108,6 +121,7 @@ def test_task_journey(driver, test_app):
     # Move test item to in progress
     move_to_in_progress_button = driver.find_element_by_xpath('//a[@class="btn btn-primary"][contains(., "Move to In Progress")]')
     move_to_in_progress_button.click()
+
     web_page_data =  driver.page_source
     assert "Mark as Completed" in web_page_data 
     assert "Move to In Progress" not in web_page_data    

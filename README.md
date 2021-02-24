@@ -34,6 +34,29 @@ The `.env` file is used by flask to set environment variables when running `flas
 
 [TRELLO_API_KEY], [TRELLO_TOKEN] and [BOARD_ID] variables should be added to the `.env` file for accessing the Trello API
 
+## Selenium Tests
+Selenium tests were done using Firefox browser. You may need to download geckodriver (from https://github.com/mozilla/geckodriver/releases) and make it available in your environment PATH.
+
+You will also need to install selenium by runnning
+```bash
+$ poetry install selenium
+``` 
+
+## VCR Tests
+To run vcr tests you may need to install vcrpy by running
+```bash
+$ poetry install vcrpy
+```
+Create a test board in Trello and add items at various stages (i.e. Todo, Doing, Done). These will be used for the first time vcr tests are run. Add the below IDs to `.env` file(see README.md file) for the initial VCR tests.
+
+[TODO_ITEM_ID] - this is a new/TODO item ID that will be moved to in-progress/Doing
+
+[COMPLETED_ITEM_ID] - this is a completed/Done item ID that will be moved back to Not started
+
+[IN_PROGTESS_ITEM_ID] - this is an in-progress/Doing item ID that will be moved to Completed/Done
+
+[REMOVE_ITEM_ID] - this is a test item ID that will be removed
+
 
 ## Running the App
 

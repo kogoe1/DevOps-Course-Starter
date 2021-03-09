@@ -32,6 +32,49 @@ $ cp .env.template .env  # (first time only)
 
 The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change). There's also a [SECRET_KEY](https://flask.palletsprojects.com/en/1.1.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie.
 
+[TRELLO_API_KEY], [TRELLO_TOKEN] and [BOARD_ID] variables should be added to the `.env` file for accessing the Trello API
+
+
+## Selenium Tests
+Selenium tests were done using Firefox browser. You may need to download geckodriver (from https://github.com/mozilla/geckodriver/releases) and make it available in your environment PATH.
+
+You may need to run the below command to install selenium if not already installed (this will install all the depenedenies in pyproject.toml file that are not already installed)
+```bash
+$ poetry install
+``` 
+
+Run the below command from `todo_app` directory to run Selenium tets
+```bash
+$ poetry run pytest tests_e2e
+```
+
+## VCR Tests
+To run vcr tests you may need to run poetry install. Running the below, if not done already, will install all the depenedenies in pyproject.toml file that are not already installed
+```bash
+$ poetry install
+```
+Create a test board in Trello and add items at various stages (i.e. Todo, Doing, Done). These will be used for the first time vcr tests are run. Add the below IDs to `.env` file(see README.md file) for the initial VCR tests.
+
+[TODO_ITEM_ID] - this is a new/TODO item ID that will be moved to in-progress/Doing
+
+[COMPLETED_ITEM_ID] - this is a completed/Done item ID that will be moved back to Not started
+
+[IN_PROGRESS_ITEM_ID] - this is an in-progress/Doing item ID that will be moved to Completed/Done
+
+[REMOVE_ITEM_ID] - this is a test item ID that will be removed
+
+Run the below command from `todo_app` directory to run VCR tets
+```bash
+$ poetry run pytest tests/test_integration_vcr.py 
+```
+
+## Running the tests
+The tests can be run by doing the below from `todo_app` directory
+
+```bash
+$ poetry run pytest tests
+```
+
 ## Running the App
 
 Once the all dependencies have been installed, start the Flask app in development mode within the poetry environment by running:

@@ -119,6 +119,9 @@ env/
 ### Configuration files ###
 .env
 
-### Othere Log files
+### Other Log files
 geckodriver.log
 log.txt
+
+### Vagrant local config files
+.vagrant

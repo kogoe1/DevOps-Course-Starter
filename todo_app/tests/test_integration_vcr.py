@@ -3,6 +3,7 @@ from todo_app import app
 import pytest
 import requests
 import os
+import vcr
 
 from todo_app.tests.test_request import MockedRequests
 
@@ -14,12 +15,13 @@ def client():
 
     # Create the new app.
     test_app = app.create_app()
-    # Use the app to create a test_client that can be used in our tests.
+    # Use the app to create a test_client that can be used in our tests
     with test_app.test_client() as client:
         yield client
 
 @pytest.mark.vcr
 # @pytest.mark.block_network
+@vcr.use_cassette('vcr_cassettes/test_index_page.yaml', record_mode='new_episodes')
 def test_index_page(client):
     response = client.get("/")
 
@@ -29,6 +31,7 @@ def test_index_page(client):
 
 @pytest.mark.vcr
 # @pytest.mark.block_network
+@vcr.use_cassette('vcr_cassettes/test_move_to_in_prgress.yaml', record_mode='new_episodes')
 def test_move_to_in_prgress(client): 
     TODO_ITEM_ID=os.environ.get('TODO_ITEM_ID')   
     response = client.get('/in_progress/' + TODO_ITEM_ID)
@@ -38,6 +41,7 @@ def test_move_to_in_prgress(client):
 
 @pytest.mark.vcr
 # @pytest.mark.block_network
+@vcr.use_cassette('vcr_cassettes/test_move_back_to_not_started.yaml', record_mode='new_episodes')
 def test_move_back_to_not_started(client):  
     COMPLETED_ITEM_ID=os.environ.get('COMPLETED_ITEM_ID')
     response = client.get("/not_started/" + COMPLETED_ITEM_ID)
@@ -46,14 +50,16 @@ def test_move_back_to_not_started(client):
 
 @pytest.mark.vcr
 # @pytest.mark.block_network
+@vcr.use_cassette('vcr_cassettes/test_move_to_completed.yaml', record_mode='new_episodes')
 def test_move_to_completed(client):   
-    IN_PROGTESS_ITEM_ID=os.environ.get('IN_PROGTESS_ITEM_ID') 
-    response = client.get("/complete/" + IN_PROGTESS_ITEM_ID)
+    IN_PROGRESS_ITEM_ID=os.environ.get('IN_PROGRESS_ITEM_ID') 
+    response = client.get("/complete/" + IN_PROGRESS_ITEM_ID)
 
     assert response.status == '302 FOUND'
 
 @pytest.mark.vcr
 # @pytest.mark.block_network
+@vcr.use_cassette('vcr_cassettes/test_delete_item.yaml', record_mode='new_episodes')
 def test_delete_item(client):  
     REMOVE_ITEM_ID=os.environ.get('REMOVE_ITEM_ID') 
     response = client.get("/remove/" + REMOVE_ITEM_ID)

@@ -44,9 +44,9 @@ def test_move_back_to_not_started(monkeypatch, client):
     assert response.status == '302 FOUND'
 
 def test_move_to_completed(monkeypatch, client):
-    IN_PROGTESS_ITEM_ID='5fb9923734e1420b507bc75e'
+    IN_PROGRESS_ITEM_ID='5fb9923734e1420b507bc75e'
     monkeypatch.setattr(requests, "request", MockedRequests.request)
-    response = client.get("/complete/" + IN_PROGTESS_ITEM_ID)
+    response = client.get("/complete/" + IN_PROGRESS_ITEM_ID)
 
     assert response.status == '302 FOUND'
 

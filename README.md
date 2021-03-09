@@ -34,18 +34,24 @@ The `.env` file is used by flask to set environment variables when running `flas
 
 [TRELLO_API_KEY], [TRELLO_TOKEN] and [BOARD_ID] variables should be added to the `.env` file for accessing the Trello API
 
+
 ## Selenium Tests
 Selenium tests were done using Firefox browser. You may need to download geckodriver (from https://github.com/mozilla/geckodriver/releases) and make it available in your environment PATH.
 
-You will also need to install selenium by runnning
+You may need to run the below command to install selenium if not already installed (this will install all the depenedenies in pyproject.toml file that are not already installed)
 ```bash
-$ poetry install selenium
+$ poetry install
 ``` 
 
-## VCR Tests
-To run vcr tests you may need to install vcrpy by running
+Run the below command from `todo_app` directory to run Selenium tets
 ```bash
-$ poetry install vcrpy
+$ poetry run pytest tests_e2e
+```
+
+## VCR Tests
+To run vcr tests you may need to run poetry install. Running the below, if not done already, will install all the depenedenies in pyproject.toml file that are not already installed
+```bash
+$ poetry install
 ```
 Create a test board in Trello and add items at various stages (i.e. Todo, Doing, Done). These will be used for the first time vcr tests are run. Add the below IDs to `.env` file(see README.md file) for the initial VCR tests.
 
@@ -53,10 +59,21 @@ Create a test board in Trello and add items at various stages (i.e. Todo, Doing,
 
 [COMPLETED_ITEM_ID] - this is a completed/Done item ID that will be moved back to Not started
 
-[IN_PROGTESS_ITEM_ID] - this is an in-progress/Doing item ID that will be moved to Completed/Done
+[IN_PROGRESS_ITEM_ID] - this is an in-progress/Doing item ID that will be moved to Completed/Done
 
 [REMOVE_ITEM_ID] - this is a test item ID that will be removed
 
+Run the below command from `todo_app` directory to run VCR tets
+```bash
+$ poetry run pytest tests/test_integration_vcr.py 
+```
+
+## Running the tests
+The tests can be run by doing the below from `todo_app` directory
+
+```bash
+$ poetry run pytest tests
+```
 
 ## Running the App
 

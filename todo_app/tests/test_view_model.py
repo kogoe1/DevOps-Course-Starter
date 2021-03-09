@@ -24,6 +24,7 @@ class TestViewModel:
 
         #Assert
         assert len(items_view_model) == 1
+        assert items_view_model[0].title == item1.title 
 
 
     @staticmethod
@@ -41,7 +42,8 @@ class TestViewModel:
         items_view_model = view_model.in_progress_items
 
         #Assert
-        assert len(items_view_model) == 1 
+        assert len(items_view_model) == 1
+        assert items_view_model[0].title == item2.title 
 
 
     @staticmethod
@@ -61,7 +63,8 @@ class TestViewModel:
         items_view_model = view_model.completed_items
 
         #Assert
-        assert len(items_view_model) == 1     
+        assert len(items_view_model) == 1
+        assert items_view_model[0].title == item3.title     
 
 
     @staticmethod
@@ -112,7 +115,8 @@ class TestViewModel:
         completed_items_view_model = view_model.show_all_done_items
 
         #Assert
-        assert len(completed_items_view_model) == 1         
+        assert len(completed_items_view_model) == 1
+        assert completed_items_view_model[0].title == item4.title         
     
     @staticmethod
     def test_show_only_recently_done_items_when_total_is_greater_than_five_2():

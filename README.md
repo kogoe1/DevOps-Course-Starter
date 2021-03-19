@@ -93,3 +93,13 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+
+## Running the App in a Virtual Machine
+This app can be run in a virtual machnine by doing the below (assuming you have vagrant installed)
+
+```bash
+vagrant up
+```
+
+You can then check that the app is up, after the above command is ran to start the virtual machine, by visiting this link http://127.0.0.1:5000/ 

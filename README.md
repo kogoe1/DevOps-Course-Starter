@@ -95,11 +95,35 @@ You should see output similar to the following:
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
 
-## Running the App in a Virtual Machine
+## Running the App in a Virtual Machine
 This app can be run in a virtual machnine by doing the below (assuming you have vagrant installed)
 
 ```bash
 vagrant up
 ```
 
-You can then check that the app is up, after the above command is ran to start the virtual machine, by visiting this link http://127.0.0.1:5000/ 
+You can then check that the app is up - after the above command is ran to start the virtual machine - by visiting this link http://127.0.0.1:5000/ 
+
+
+## Running the App in a Container Using Docker
+Docker file has been created with configuration for PROD and DEV environments.
+The app can be accessed from a browser at http://127.0.0.1:5000/ for any of the containers that are ran 
+
+Run the below commands from the root directory to build and launch the app in production mode
+```bash
+docker build --target production --tag todo-app:prod .
+
+docker run -d -p 5000:5000 --env-file .env todo-app:prod
+```
+
+To launch the app in development mode run the below commands to build and launch respectively
+```bash
+docker build --target development --tag todo-app:dev .
+
+docker run -d --env-file .env -p 5000:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/devops_mod5/todo_app todo-app:dev
+```
+
+You can also use the below docker-compose command to to launch the app in a container in development mode 
+```bash
+docker-compose up
+```

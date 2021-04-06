@@ -1,0 +1,13 @@
+version: '3.9'
+
+services: 
+  todo-app:
+    build: 
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    ports:
+      - "5000:5000"
+    env_file: .env
+    volumes: 
+      - ./todo_app:/devops_mod5/todo_app

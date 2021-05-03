@@ -1,0 +1,32 @@
+# Vagrant 
+Vagrantfile
+.vagrant
+
+#Test files
+**/tests*
+**/vcr_cassettes*
+**/pytest.ini
+.env.vcr.*
+.env.test
+
+# pyenv
+.python-version
+
+.vscode
+
+# Logs
+**/geckodriver.log
+**/log.txt
+
+#docker
+Dockerfile
+.dockerignore
+
+#git
+.git
+.gitignore
+
+
+#Env files
+.env*
+.venv 

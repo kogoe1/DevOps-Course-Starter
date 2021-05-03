@@ -6,31 +6,34 @@ from todo_app.data.forms import TodoForm
 from todo_app.data.trello import TrelloUtility
 from todo_app.data.model import ViewModel
 
+from dotenv import load_dotenv, find_dotenv
+
 import os
-
-
 
 def create_app():
     app = Flask(__name__)
 
+    file_path = find_dotenv('.env')
+    load_dotenv(file_path, override=True)
+
     app.config.from_object('todo_app.flask_config.Config')
-    
+        
 
     TRELLO_API_KEY=os.environ.get('TRELLO_API_KEY')
     TRELLO_TOKEN=os.environ.get('TRELLO_TOKEN')    
     BOARD_ID=os.environ.get('BOARD_ID')  
-    
+        
     trello_util = TrelloUtility(TRELLO_API_KEY, TRELLO_TOKEN, BOARD_ID)
 
     def taskSort(item):
-        return item.status
+            return item.status
 
     @app.route('/', methods=['GET'])
     def index():
         form = TodoForm()
         items = trello_util.get_items()
         items.sort(reverse=True, key=taskSort)  
-        
+            
         item_view_model = ViewModel(items)
         return render_template('index.html', view_model=item_view_model, form=form)
 
@@ -73,4 +76,3 @@ def create_app():
         app.run()
 
     return app
-

@@ -28,4 +28,5 @@ Dockerfile
 
 
 #Env files
-.env* 
+.env*
+.venv 

@@ -13,9 +13,6 @@ import os
 def create_app():
     app = Flask(__name__)
 
-    file_path = find_dotenv('.env')
-    load_dotenv(file_path, override=True)
-
     app.config.from_object('todo_app.flask_config.Config')
         
 

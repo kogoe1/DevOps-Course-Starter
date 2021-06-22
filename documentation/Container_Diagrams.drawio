@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e" pages="2">
     <diagram id="dkHNdPPTWpZXWv9aXYBQ" name="Page-1">
-        <mxGraphModel dx="1469" dy="319" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1469" dy="313" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -13,13 +13,13 @@
                 <mxCell id="4cQ14AEPKGNcAOL0g5Nu-3" value="&lt;div&gt;&lt;b&gt;TODO App User&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Person]&lt;/div&gt;&lt;div&gt;Uses App to organise/manage TODO list&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="4cQ14AEPKGNcAOL0g5Nu-1" vertex="1">
                     <mxGeometry y="60" width="170" height="110" as="geometry"/>
                 </mxCell>
-                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-4" value="&lt;div&gt;&lt;b&gt;Web Application&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Container&lt;br&gt;&lt;/div&gt;&lt;div&gt;: Flask/Gunicorn]&lt;/div&gt;&lt;div&gt;Delivers dynamic content to the Single Page&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-4" value="&lt;div&gt;&lt;b&gt;Web Application&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Container&lt;br&gt;&lt;/div&gt;&lt;div&gt;: Flask/Gunicorn]&lt;/div&gt;&lt;div&gt;Delivers dynamic content to the user via the docker container&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="-110" y="320" width="230" height="140" as="geometry"/>
                 </mxCell>
                 <mxCell id="4cQ14AEPKGNcAOL0g5Nu-6" value="&lt;div&gt;&lt;b&gt;Trello API&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Software System]&lt;/div&gt;&lt;div&gt;REST API System to store TODO lists&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" parent="1" vertex="1">
                     <mxGeometry x="290" y="320" width="250" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-9" value="&lt;div&gt;&lt;b&gt;Single Page Application&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Container:]&lt;/div&gt;&lt;div&gt;Provides all functionality of the TODO App to users via their web browser&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-9" value="&lt;div&gt;&lt;b&gt;Docker Container&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Container:]&lt;/div&gt;&lt;div&gt;Provides all functionality of the TODO App to users via their web browser&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="-540" y="320" width="230" height="170" as="geometry"/>
                 </mxCell>
                 <mxCell id="4cQ14AEPKGNcAOL0g5Nu-13" value="" style="endArrow=none;dashed=1;html=1;" parent="1" edge="1">
@@ -63,8 +63,10 @@
                         <mxPoint x="-270" y="398" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-39" value="Delivers to user's web browser" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="4cQ14AEPKGNcAOL0g5Nu-38" connectable="0" vertex="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-39" value="Delivers to user via docker container" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="4cQ14AEPKGNcAOL0g5Nu-38" connectable="0" vertex="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="4cQ14AEPKGNcAOL0g5Nu-24" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-560" y="720" width="1020" height="170" as="geometry"/>
@@ -147,7 +149,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="AbyTnb3ERhHMn_pa4dGo" name="Page-2">
-        <mxGraphModel dx="1469" dy="319" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1469" dy="313" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="pgOKWbctN6__go5a5KIf-0"/>
                 <mxCell id="pgOKWbctN6__go5a5KIf-1" parent="pgOKWbctN6__go5a5KIf-0"/>

@@ -10,11 +10,15 @@ from todo_app.tests.test_request import MockedRequests
 @pytest.fixture
 def client():
     # Use our test integration config instead of the 'real' version 
-    file_path = find_dotenv('.env')
-    load_dotenv(file_path, override=True)
+    # file_path = find_dotenv('.env')
+    # load_dotenv(file_path, override=True)
 
+    # VCR_BOARD_ID=os.environ.get('VCR_BOARD_ID')
+    # os.environ['BOARD_ID']=VCR_BOARD_ID
+    
     # Create the new app.
     test_app = app.create_app()
+
     # Use the app to create a test_client that can be used in our tests
     with test_app.test_client() as client:
         yield client
@@ -23,6 +27,10 @@ def client():
 # @pytest.mark.block_network
 @vcr.use_cassette('vcr_cassettes/test_index_page.yaml', record_mode='new_episodes')
 def test_index_page(client):
+
+    BOARD_ID=os.environ['BOARD_ID']
+    print ("Board ID=", BOARD_ID)
+
     response = client.get("/")
 
     assert response.status == '200 OK'

@@ -1,0 +1,9 @@
+services:
+  - docker
+
+before_install:
+- docker build --target test --tag todo_test_image .
+
+script:
+- echo "hello world"
+- docker run todo_test_image tests/test_view_model.py

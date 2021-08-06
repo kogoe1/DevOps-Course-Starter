@@ -11,7 +11,7 @@ before_install:
 - docker build --target test --tag todo_test_image .
 
 script:
-- docker run todo_test_image tests/test_travis_env.py
+- docker run todo_test_image --env TEST_ENV_VAR=$TEST_ENV_VAR tests/test_travis_env.py
 # - docker run todo_test_image tests/test_view_model.py
 # - docker run todo_test_image tests/test_integration.py
 # - docker run todo_test_image tests_e2e/test_selenium.py

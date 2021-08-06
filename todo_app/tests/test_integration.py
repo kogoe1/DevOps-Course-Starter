@@ -9,14 +9,11 @@ from todo_app.tests.test_request import MockedRequests
 @pytest.fixture
 def client():
     # Use our test integration config instead of the 'real' version 
-    # file_path = find_dotenv('.env.test')
-    # load_dotenv(file_path, override=True)
+    file_path = find_dotenv('.env.test')
+    load_dotenv(file_path, override=True)
 
     # Create the new app.
     test_app = app.create_app()
-    
-    test_env_var=os.environ.get('TEST_ENV_VAR')
-    print('TEST ENV VAR: ', test_env_var)
 
     # Use the app to create a test_client that can be used in our tests.
     with test_app.test_client() as client:

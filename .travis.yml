@@ -12,6 +12,6 @@ before_install:
 
 script:
 - docker run --env TEST_ENV_VAR=$TEST_ENV_VAR todo_test_image  tests/test_travis_env.py
-# - docker run todo_test_image tests/test_view_model.py
-# - docker run todo_test_image tests/test_integration.py
+- docker run  todo_test_image tests/test_view_model.py
+- docker run --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN -e BOARD_ID=$BOARD_ID todo_test_image tests/test_integration.py
 # - docker run todo_test_image tests_e2e/test_selenium.py

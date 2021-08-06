@@ -1,17 +1,10 @@
 services:
   - docker
 
-# env:
-#   global:
-#     - TEST_ENV_VAR: test_env_var
-
-# before_script: echo $TEST_ENV_VAR
-
 before_install:
 - docker build --target test --tag todo_test_image .
 
 script:
-- docker run --env TEST_ENV_VAR=$TEST_ENV_VAR todo_test_image  tests/test_travis_env.py
 - docker run  todo_test_image tests/test_view_model.py
-- docker run --env SECRET_KEY=SECRET_KEY --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN -e BOARD_ID=$BOARD_ID todo_test_image tests/test_integration.py
-# - docker run todo_test_image tests_e2e/test_selenium.py
+- docker run --env SECRET_KEY=SECRET_KEY --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN --env BOARD_ID=$BOARD_ID todo_test_image tests/test_integration.py
+- docker run --env SECRET_KEY=SECRET_KEY --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN --env BOARD_ID=$BOARD_ID todo_test_image tests_e2e/test_selenium.py

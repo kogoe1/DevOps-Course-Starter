@@ -6,5 +6,5 @@ before_install:
 
 script:
 - docker run todo_test_image tests/test_view_model.py
-# - docker run todo_test_image tests/test_integration.py
-- docker run todo_test_image tests_e2e/test_selenium.py
+- docker run todo_test_image tests/test_integration.py
+# - docker run todo_test_image tests_e2e/test_selenium.py

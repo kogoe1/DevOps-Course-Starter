@@ -1,6 +1,12 @@
 services:
   - docker
 
+env:
+  global:
+    - TEST_ENV_VAR: $TEST_ENV_VAR
+
+before_script: echo $TEST_ENV_VAR
+
 before_install:
 - docker build --target test --tag todo_test_image .
 

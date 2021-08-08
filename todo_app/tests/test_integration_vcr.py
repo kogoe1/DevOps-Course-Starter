@@ -10,11 +10,11 @@ from todo_app.tests.test_request import MockedRequests
 @pytest.fixture
 def client():
     # Use our test integration config instead of the 'real' version 
-    # file_path = find_dotenv('.env')
-    # load_dotenv(file_path, override=True)
+    file_path = find_dotenv('.env')
+    load_dotenv(file_path, override=True)
 
-    # VCR_BOARD_ID=os.environ.get('VCR_BOARD_ID')
-    # os.environ['BOARD_ID']=VCR_BOARD_ID
+    VCR_BOARD_ID=os.environ.get('VCR_BOARD_ID')
+    os.environ['BOARD_ID']=VCR_BOARD_ID
     
     # Create the new app.
     test_app = app.create_app()

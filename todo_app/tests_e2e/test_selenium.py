@@ -21,13 +21,7 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
 BOARD_URL = "https://api.trello.com/1/boards/"
-BOARDS_URL = "https://api.trello.com/1/members/me/boards?fields=name,url"
-
-# file_path = find_dotenv('.env')
-# load_dotenv(file_path, override=True)
-
-# KEY=os.environ.get('TRELLO_API_KEY')
-# TOKEN=os.environ.get('TRELLO_TOKEN') 
+BOARDS_URL = "https://api.trello.com/1/members/me/boards?fields=name,url" 
 
 KEY=''
 TOKEN='' 

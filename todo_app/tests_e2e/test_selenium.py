@@ -1,19 +1,16 @@
 import os
-import pytest
-import requests
-
-from todo_app import app, data
 from threading import Thread
 
-from dotenv import load_dotenv, find_dotenv
-
+import pytest
+import requests
+from dotenv import find_dotenv, load_dotenv
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from todo_app import app, data
 
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
@@ -55,7 +52,7 @@ def test_app():
 
 def create_trello_board():
     url = BOARD_URL
-    new_board_name = "Test To Do List"
+    new_board_name = "Seleniium To Do List"
 
     KEY=os.environ.get('TRELLO_API_KEY')
     TOKEN=os.environ.get('TRELLO_TOKEN') 

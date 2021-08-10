@@ -52,7 +52,7 @@ def test_app():
 
 def create_trello_board():
     url = BOARD_URL
-    new_board_name = "Seleniium To Do List"
+    new_board_name = "Selenium To Do List"
 
     KEY=os.environ.get('TRELLO_API_KEY')
     TOKEN=os.environ.get('TRELLO_TOKEN') 

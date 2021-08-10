@@ -1,29 +1,37 @@
 import os
-import pytest
-import requests
-
-from todo_app import app, data
 from threading import Thread
 
-from dotenv import load_dotenv, find_dotenv
-
+import pytest
+import requests
+from dotenv import find_dotenv, load_dotenv
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from todo_app import app, data
+
+chrome_options = Options()
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-dev-shm-usage')
 
 BOARD_URL = "https://api.trello.com/1/boards/"
-BOARDS_URL = "https://api.trello.com/1/members/me/boards?fields=name,url"
+BOARDS_URL = "https://api.trello.com/1/members/me/boards?fields=name,url" 
 
-file_path = find_dotenv('.env')
-load_dotenv(file_path, override=True)
-
-KEY=os.environ.get('TRELLO_API_KEY')
-TOKEN=os.environ.get('TRELLO_TOKEN') 
+KEY=''
+TOKEN='' 
 
 @pytest.fixture(scope='module')
 def test_app():
+
+    file_path = find_dotenv('.env')
+    load_dotenv(file_path, override=True)
+
+    KEY=os.environ.get('TRELLO_API_KEY')
+    TOKEN=os.environ.get('TRELLO_TOKEN') 
+
     # Create the new board & update the board id environment variable 
     board_id = create_trello_board()
 
@@ -44,7 +52,10 @@ def test_app():
 
 def create_trello_board():
     url = BOARD_URL
-    new_board_name = "Test To Do List"
+    new_board_name = "Seleniium To Do List"
+
+    KEY=os.environ.get('TRELLO_API_KEY')
+    TOKEN=os.environ.get('TRELLO_TOKEN') 
 
     query = {
     'key': KEY,
@@ -93,7 +104,8 @@ def delete_trello_board(board_id):
 
 @pytest.fixture(scope="module")
 def driver():
-    with webdriver.Firefox() as driver:
+    # with webdriver.Firefox() as driver:
+    with webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options) as driver:
         yield driver    
 
 

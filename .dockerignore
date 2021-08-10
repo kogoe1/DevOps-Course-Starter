@@ -3,7 +3,7 @@ Vagrantfile
 .vagrant
 
 #Test files
-**/tests*
+# **/tests*
 **/vcr_cassettes*
 **/pytest.ini
 .env.vcr.*
@@ -15,6 +15,7 @@ Vagrantfile
 .vscode
 
 # Logs
+*.log
 **/geckodriver.log
 **/log.txt
 

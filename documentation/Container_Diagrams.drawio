@@ -1,0 +1,152 @@
+<mxfile host="65bd71144e" pages="2">
+    <diagram id="dkHNdPPTWpZXWv9aXYBQ" name="Page-1">
+        <mxGraphModel dx="1469" dy="313" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-1" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="-290" y="20" width="170" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="4cQ14AEPKGNcAOL0g5Nu-1" vertex="1">
+                    <mxGeometry x="56" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-3" value="&lt;div&gt;&lt;b&gt;TODO App User&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Person]&lt;/div&gt;&lt;div&gt;Uses App to organise/manage TODO list&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="4cQ14AEPKGNcAOL0g5Nu-1" vertex="1">
+                    <mxGeometry y="60" width="170" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-4" value="&lt;div&gt;&lt;b&gt;Flask&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Container&lt;span&gt;: Flask]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Web Server that manages HTTP requests to and responses from the web application&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-380" y="340" width="230" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-6" value="&lt;div&gt;&lt;b&gt;Trello API&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Software System]&lt;/div&gt;&lt;div&gt;REST API System to store TODO lists&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" parent="1" vertex="1">
+                    <mxGeometry x="386" y="340" width="250" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-13" value="" style="endArrow=none;dashed=1;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-760" y="270" as="sourcePoint"/>
+                        <mxPoint x="270" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-14" value="" style="endArrow=none;dashed=1;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-760" y="579" as="sourcePoint"/>
+                        <mxPoint x="270" y="579" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-15" value="" style="endArrow=none;dashed=1;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-760" y="580" as="sourcePoint"/>
+                        <mxPoint x="-760" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-16" value="" style="endArrow=none;dashed=1;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="270" y="580" as="sourcePoint"/>
+                        <mxPoint x="270" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-17" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.996;exitY=0.45;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" target="4cQ14AEPKGNcAOL0g5Nu-6" edge="1" source="3">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="120" y="384.5" as="sourcePoint"/>
+                        <mxPoint x="220" y="384.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-18" value="Makes API Calls To" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="4cQ14AEPKGNcAOL0g5Nu-17" connectable="0" vertex="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-38" value="Passes on &lt;br&gt;User's requests" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="2" target="4cQ14AEPKGNcAOL0g5Nu-4" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-440" y="370" as="sourcePoint"/>
+                        <mxPoint x="-498" y="419" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-24" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-560" y="720" width="900" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-25" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="-500" y="745" width="140" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-26" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="4cQ14AEPKGNcAOL0g5Nu-25" vertex="1">
+                    <mxGeometry x="42.11764705882353" width="42.352941176470594" height="42.352941176470594" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-27" value="Person" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="4cQ14AEPKGNcAOL0g5Nu-25" vertex="1">
+                    <mxGeometry y="42.35" width="120" height="57.65" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-28" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="-348" y="772" width="128" height="85" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-29" value="" style="endArrow=none;dashed=1;html=1;" parent="4cQ14AEPKGNcAOL0g5Nu-28" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint as="sourcePoint"/>
+                        <mxPoint x="128" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-30" value="" style="endArrow=none;dashed=1;html=1;" parent="4cQ14AEPKGNcAOL0g5Nu-28" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="128" y="85" as="sourcePoint"/>
+                        <mxPoint x="128" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-31" value="" style="endArrow=none;dashed=1;html=1;" parent="4cQ14AEPKGNcAOL0g5Nu-28" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint y="85" as="sourcePoint"/>
+                        <mxPoint x="128" y="85" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint y="85"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-32" value="" style="endArrow=none;dashed=1;html=1;" parent="4cQ14AEPKGNcAOL0g5Nu-28" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint y="85" as="sourcePoint"/>
+                        <mxPoint as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-33" value="Software Sytem" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-200" y="785" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-34" value="Existing Software System" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" parent="1" vertex="1">
+                    <mxGeometry x="-46" y="785" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-35" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
+                    <mxGeometry x="-516" y="720" as="geometry">
+                        <mxPoint x="100" y="814.5" as="sourcePoint"/>
+                        <mxPoint x="200" y="814.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-36" value="Relationship" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="4cQ14AEPKGNcAOL0g5Nu-35" connectable="0" vertex="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-37" value="Internal Software System&amp;nbsp; [Docker Container]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="-330" y="805" width="90" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-41" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.67;entryY=-0.029;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="4cQ14AEPKGNcAOL0g5Nu-3" target="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-230" y="240" as="sourcePoint"/>
+                        <mxPoint x="-580" y="330" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4cQ14AEPKGNcAOL0g5Nu-42" value="Adds, views and manages TODO lists/items&lt;br&gt;via HTTP requests" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="4cQ14AEPKGNcAOL0g5Nu-41" connectable="0" vertex="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="&lt;div&gt;&lt;b&gt;Gunicorn&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Container&lt;span&gt;: Gunicorn]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Handles and passes on user's requests to Flask&amp;nbsp;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="1">
+                    <mxGeometry x="-730" y="340" width="230" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;div&gt;&lt;b&gt;Web Application&lt;/b&gt;&lt;/div&gt;&lt;div&gt;[Container&lt;span&gt;: Python]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Delivers dynamic content to the user via Flask/Gunicorn&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="1">
+                    <mxGeometry x="-10" y="340" width="230" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Delivers responses&lt;br&gt;to user's request" style="endArrow=classic;html=1;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-9" y="406" as="sourcePoint"/>
+                        <mxPoint x="-150" y="406" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

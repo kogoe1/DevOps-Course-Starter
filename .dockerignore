@@ -7,7 +7,7 @@ Vagrantfile
 **/vcr_cassettes*
 **/pytest.ini
 .env.vcr.*
-.env.test
+# .env.test
 
 # pyenv
 .python-version
@@ -29,5 +29,5 @@ Dockerfile
 
 
 #Env files
-.env*
+.env
 .venv 

@@ -4,7 +4,13 @@ services:
 before_install:
 - docker build --target test --tag todo_test_image .
 
+# install:
+# - docker build --target production --tag todo_app_image .
+
+
 script:
 - docker run  todo_test_image tests/test_view_model.py
-- docker run --env SECRET_KEY=test_secret_key --env TRELLO_API_KEY=this_is_trello_api_key_123 --env TRELLO_TOKEN=and_this_is_the_trello_token_56789 --env BOARD_ID=5fb51906cc7d395b1b145b0e todo_test_image tests/test_integration.py
-- docker run --env SECRET_KEY=$SECRET_KEY --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN --env BOARD_ID=$BOARD_ID todo_test_image tests_e2e/test_selenium.py
+#- docker run --env SECRET_KEY=test_secret_key --env TRELLO_API_KEY=this_is_trello_api_key_123 --env TRELLO_TOKEN=and_this_is_the_trello_token_56789 --env BOARD_ID=5fb51906cc7d395b1b145b0e todo_test_image tests/test_integration.py
+#- docker run --env SECRET_KEY=$SECRET_KEY --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN --env BOARD_ID=$BOARD_ID todo_test_image tests_e2e/test_selenium.py
+- docker run --env-file=.env.test todo_test_image tests/test_integration.py
+- docker run --env SECRET_KEY=$SECRET_KEY --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN todo_test_image tests_e2e/test_selenium.py

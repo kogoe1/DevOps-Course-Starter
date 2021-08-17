@@ -12,6 +12,7 @@ script:
 
 
 # Push production image to dockerhub
+language: generic
 deploy:
   provider: script
   script: bash docker_push

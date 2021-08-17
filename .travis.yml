@@ -13,7 +13,8 @@ script:
 
 # Push production image to dockerhub
 language: generic
-deploy:
+deploy: 
+  skip_cleanup: true
   provider: script
   script: bash docker_push
   on:

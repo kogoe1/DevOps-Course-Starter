@@ -3,7 +3,7 @@ services:
 
 before_install:
 # - docker build --target test --tag todo_test_image .
-- docker build --target production --tag latest .
+- docker build --target production --tag kogoe1/todo_app:latest .
 
 script:
 # - docker run todo_test_image todo_app/tests/test_view_model.py

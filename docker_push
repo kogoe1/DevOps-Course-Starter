@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "$DOCKER_PASSWORD" | docker login -u kogoe1 --password-stdin
+docker push kogoe1/todo_app:latest

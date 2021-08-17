@@ -2,13 +2,13 @@ services:
   - docker
 
 before_install:
-- docker build --target test --tag todo_test_image .
+# - docker build --target test --tag todo_test_image .
 - docker build --target production --tag latest .
 
 script:
-- docker run todo_test_image todo_app/tests/test_view_model.py
-- docker run --env-file=.env.test todo_test_image todo_app/tests/test_integration.py
-- docker run --env SECRET_KEY=$SECRET_KEY --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN todo_test_image todo_app/tests_e2e/test_selenium.py
+# - docker run todo_test_image todo_app/tests/test_view_model.py
+# - docker run --env-file=.env.test todo_test_image todo_app/tests/test_integration.py
+# - docker run --env SECRET_KEY=$SECRET_KEY --env TRELLO_API_KEY=$TRELLO_API_KEY --env TRELLO_TOKEN=$TRELLO_TOKEN todo_test_image todo_app/tests_e2e/test_selenium.py
 
 
 # Push production image to dockerhub
@@ -16,5 +16,5 @@ deploy:
   provider: script
   script: bash docker_push
   on:
-    branch: master
+    branch: exercise-8
 

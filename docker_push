@@ -2,7 +2,7 @@
 echo "$DOCKER_PASSWORD" | docker login -u kogoe1 --password-stdin
 docker push kogoe1/todo_app:latest
 
-# docker pull kogoe1/todo_app:latest
+docker pull kogoe1/todo_app:latest
 docker login --username=fiifiogoe@yahoo.com --password=$HEROKU_API_KEY registry.heroku.com
 docker tag kogoe1/todo_app:latest registry.heroku.com/todo-app-ex8/web
 docker push registry.heroku.com/todo-app-ex8/web

@@ -18,12 +18,6 @@ deploy:
   provider: script
   script: 
     bash docker_push
-    docker pull kogoe1/todo_app:latest
-    docker login --username=fiifiogoe@yahoo.com --password=$HEROKU_API_KEY registry.heroku.com
-    docker tag kogoe1/todo_app:latest registry.heroku.com/todo-app-ex8/web
-    docker push registry.heroku.com/todo-app-ex8/web
-    heroku container:release web
-    heroku open
   on:
     branch: exercise-8
 

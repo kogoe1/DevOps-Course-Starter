@@ -1,4 +1,5 @@
 #!/bin/bash
+#Push built docker image to dockerhub
 echo "$DOCKER_PASSWORD" | docker login -u kogoe1 --password-stdin
 docker push kogoe1/todo_app:latest
 
@@ -7,7 +8,6 @@ docker pull kogoe1/todo_app:latest
 docker login --username=fiifiogoe@yahoo.com --password=$HEROKU_API_KEY registry.heroku.com
 # Tag it for Heroku
 docker tag kogoe1/todo_app:latest registry.heroku.com/todo-app-ex8/web
-# Push it to Heroku registry
+# Push to Heroku registry and release it
 docker push registry.heroku.com/todo-app-ex8/web
 heroku container:release web -a todo-app-ex8
-# heroku open -a todo-app-ex8

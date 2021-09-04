@@ -12,7 +12,6 @@ RUN poetry config virtualenvs.create false --local && poetry install --no-dev --
 # This is so it runs in heroku
 RUN chmod +x ./entrypoint.sh
 ENTRYPOINT ./entrypoint.sh
-# CMD gunicorn -w 3 -b 0.0.0.0:$PORT "todo_app.app:create_app()"
 
 FROM base AS development
 RUN poetry install 

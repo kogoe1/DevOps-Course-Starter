@@ -10,4 +10,4 @@ docker tag kogoe1/todo_app:latest registry.heroku.com/todo-app-ex8/web
 # Push it to Heroku registry
 docker push registry.heroku.com/todo-app-ex8/web
 heroku container:release web -a todo-app-ex8
-heroku open -a todo-app-ex8
+# heroku open -a todo-app-ex8

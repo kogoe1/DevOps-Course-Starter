@@ -9,7 +9,7 @@ COPY . /devops_mod5
 
 FROM base AS production
 RUN poetry config virtualenvs.create false --local && poetry install --no-dev --no-root
-# This is so it runs in heroku
+# This is so it runs in heroku 
 RUN chmod +x ./entrypoint.sh
 ENTRYPOINT ./entrypoint.sh
 

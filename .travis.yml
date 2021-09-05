@@ -18,5 +18,5 @@ deploy:
   provider: script
   script: bash docker_push
   on:
-    branch: exercise-8
+    branch: master
 

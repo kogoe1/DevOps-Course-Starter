@@ -15,12 +15,20 @@ class Storage:
         
             trello_util = TrelloUtility(TRELLO_API_KEY, TRELLO_TOKEN, BOARD_ID)
             return trello_util
+        elif storage_type == 'MONGO':
+            return Storage.getMongoUtility()
         else:
-            # Default to MongoDB if not Trello
-            username = os.environ.get('MONGO_USERNAME')
-            password = os.environ.get('MONGO_PASSWORD')
-            mongo_url = os.environ.get('MONGO_URL')
-            default_db = os.environ.get('DEFAULT_DB')
+            # Default to MongoDB
+            return Storage.getMongoUtility()
 
-            mongoUtility =  MongoDbUtility(username, password, mongo_url, default_db)
-            return mongoUtility    
+
+    @staticmethod
+    def getMongoUtility():
+        username = os.environ.get('MONGO_USERNAME')
+        password = os.environ.get('MONGO_PASSWORD')
+        mongo_url = os.environ.get('MONGO_URL')
+        default_db = os.environ.get('DEFAULT_DB')
+
+        mongoUtility =  MongoDbUtility(username, password, mongo_url, default_db)
+        return mongoUtility    
+

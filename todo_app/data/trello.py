@@ -2,8 +2,9 @@ from typing import List
 import requests
 from requests.models import Response
 from todo_app.data.item import Item
+from todo_app.data.storage_interface import StorageUtilityInterface
 
-class TrelloUtility:
+class TrelloUtility(StorageUtilityInterface):
     BOARD_URL = "https://api.trello.com/1/boards/"
     CARDS_URL = "https://api.trello.com/1/cards/"
     STATUS_NOT_STARTED = "Not Started"

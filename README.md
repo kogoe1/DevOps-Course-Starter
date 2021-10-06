@@ -129,7 +129,7 @@ docker-compose up
 ```
 
 # Mongo DB integration
-Mongo DB data persistence/storage is now added to this app. To use Mongo DB add the below in `.env` file or to environment variables (to use trello stoarge set `STORAGE_TYPE=TRELLO`)
+Mongo DB data persistence/storage is now added to this app. To use Mongo DB add the below to `.env` file or to environment variables (to use trello stoarge set `STORAGE_TYPE=TRELLO`)
 DEFAULT_DB is set to the db that holds data for the app. Associated collections for this DB are `not_started`, `in_progress` and `completed`
 
 ```bash

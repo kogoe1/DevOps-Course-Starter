@@ -127,3 +127,13 @@ You can also use the below docker-compose command to to launch the app in a cont
 ```bash
 docker-compose up
 ```
+
+Mongo DB data persistence/storage is now added to this app. To use Mongo DB add the below in `.env` file or to environment variables (to use trello stoarge set `STORAGE_TYPE=TRELLO`)
+
+```bash
+STORAGE_TYPE=MONGO
+MONGO_USERNAME=<appropriate username>
+MONGO_PASSWORD=<appropriate password>
+MONGO_URL=<appropriate mongo db url> (e.g. cluster0.jvv1n.mongodb.net)
+DEFAULT_DB=<appropriate database>
+ ```

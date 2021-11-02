@@ -1,4 +1,5 @@
 import datetime
+from todo_app.data.item_status import ItemStatus
 
 class ViewModel:
     def __init__(self, items):
@@ -13,7 +14,7 @@ class ViewModel:
     def todo_items(self):
         todo_items = []
         for item in self._items:
-            if item.status == "Not Started":
+            if item.status == ItemStatus.NOT_STARTED:
                 todo_items.append(item)
 
         return todo_items
@@ -23,7 +24,7 @@ class ViewModel:
     def in_progress_items(self):
         in_porgress_items = []
         for item in self._items:
-            if item.status == "In Progress":
+            if item.status == ItemStatus.IN_PROGRESS:
                 in_porgress_items.append(item)
 
         return in_porgress_items
@@ -54,7 +55,7 @@ class ViewModel:
     def get_completed_items(self):
         completed_items = []
         for item in self._items:
-            if item.status == "Completed":
+            if item.status == ItemStatus.COMPLETED:
                 completed_items.append(item)
         return completed_items
 

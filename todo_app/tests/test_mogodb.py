@@ -8,7 +8,7 @@ from dotenv import load_dotenv, find_dotenv
 @pytest.fixture
 def mongoUtility():
 
-    file_path = find_dotenv('.env.test')
+    file_path = find_dotenv('.env')
     load_dotenv(file_path, override=True)
 
     username = os.environ.get('MONGO_USERNAME')

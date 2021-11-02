@@ -27,7 +27,8 @@ class MongoDbUtility(StorageUtilityInterface):
                     title = item["title"]
                     description = item["description"]
                     status = self.get_status_from_collection(collection)
-                    last_activity_date = item["lastActivityDate"]
+                    retrieved_last_activity_date = item["lastActivityDate"]
+                    last_activity_date = self.formated_last_activity_date(retrieved_last_activity_date)
                     items.append(Item(id, title, description, status, last_activity_date))
 
         return items
@@ -38,7 +39,7 @@ class MongoDbUtility(StorageUtilityInterface):
         new_item  = {
             "title": title,
             "description": description,
-            "lastActivityDate": self.date_in_app_format()
+            "lastActivityDate": datetime.datetime.now()
         }
 
         collection = self.status_collection(status)
@@ -57,7 +58,7 @@ class MongoDbUtility(StorageUtilityInterface):
             "_id": db_id,
             "title": retrieved_item.title,
             "description": retrieved_item.description,
-            "lastActivityDate": self.date_in_app_format()
+            "lastActivityDate": datetime.datetime.now()
         }
 
         query = {"_id": db_id}
@@ -115,6 +116,8 @@ class MongoDbUtility(StorageUtilityInterface):
                 return item
 
 
-    def date_in_app_format(self):
-        now = datetime.datetime.now()
-        return now.strftime("%Y-%m-%dT%H:%M:%SZ")            
+    def formated_last_activity_date(self, lastActivityDate):
+        if isinstance(lastActivityDate, datetime.datetime):
+            return lastActivityDate.strftime("%Y-%m-%dT%H:%M:%SZ")    
+        else:
+            return lastActivityDate

@@ -1,4 +1,5 @@
 
+import flask_login
 from todo_app.data.model import ViewModel
 from flask import Flask, render_template, redirect, request
 # from todo_app.flask_config import Config, TrelloConfig
@@ -8,13 +9,15 @@ from todo_app.data.storage import Storage
 from todo_app.data.item_status import ItemStatus
 
 
-from flask_login import LoginManager, login_required, logout_user, login_user
+from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from oauthlib.oauth2 import WebApplicationClient
 import os
 import json
 import requests
-from todo_app.data.user import User
+from todo_app.data.user import Roles, User
 from flask.helpers import url_for
+from functools import wraps
+
 
 
 login_manager = LoginManager()
@@ -24,6 +27,19 @@ OAUTH_URL=os.environ.get('OAUTH_URL')
 TOKEN_ENDPOINT=os.environ.get('TOKEN_ENDPOINT')
 USER_INFO_ENDPOINT=os.environ.get('USER_INFO_ENDPOINT')
 
+# def required_roles(*roles):
+#    def wrapper(f):
+#       @wraps(f)
+#       def wrapped(*args, **kwargs):
+#          if get_current_user_role() not in roles:
+#             flash('Authentication error, please check your details and try again','error')
+#             return redirect(url_for('index'))
+#          return f(*args, **kwargs)
+#       return wrapped
+#    return wrapper
+ 
+# def get_current_user_role():
+#    return g.user.role
 
 def create_app():
     app = Flask(__name__)
@@ -73,6 +89,8 @@ def create_app():
 
         if userinfo_response.ok:
             unique_id = userinfo_response.json()['id']
+            # Check if user_name is a valid property
+            user_name = userinfo_response.json()['user_name']
             user = User(unique_id)
         else:
             return "User not available or not verified", 400 
@@ -86,8 +104,7 @@ def create_app():
 
     @login_manager.unauthorized_handler
     def unauthenticated():
-        # Add logic to redirect to the
-        # Github OAuth flow when unauthenticated
+        # Redirect to the Github OAuth flow when unauthenticated
         return redirect (url_for('login'))
             
 
@@ -119,7 +136,16 @@ def create_app():
         items.sort(reverse=True, key=taskSort)  
             
         item_view_model = ViewModel(items)
-        return render_template('index.html', view_model=item_view_model, form=form)
+
+        # Default to Read Only Template 
+        template_html = 'index_ro.html'
+    
+        user_role =  current_user.get_role()   
+        if user_role == Roles.WRITER:    
+            template_html = 'index.html'
+                
+        return render_template(template_html, view_model=item_view_model, form=form)
+
 
     @app.route('/', methods=['POST'])
     @login_required

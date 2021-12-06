@@ -75,7 +75,6 @@ def create_app():
         if userinfo_response.ok:
             unique_id = userinfo_response.json()['id']
             user_login = userinfo_response.json()['login']
-            # user = User(unique_id)
             user = User(unique_id)
         else:
             return "User not available or not verified", 400 

@@ -19,12 +19,12 @@ class UserRoles():
         pass  
 
     USER_ROLES = [
-        {'id': '73077410', 'role': Roles.WRITER},
-        {'id': '73077500', 'role': Roles.READER}
+        {'login': 'kogoe1', 'id': '73077410', 'role': Roles.WRITER},
+        {'login': 'kofi', 'id': '73077500', 'role': Roles.READER}
     ]
 
     def get_user_roles(self, user_id):
-        # Default to READER. Role with the least permision
+        # Default to READER - Role with the least permision
         role = Roles.READER
         for mapping in self.USER_ROLES:
             if mapping['id'] == user_id:

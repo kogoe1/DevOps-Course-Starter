@@ -128,7 +128,7 @@ You can also use the below docker-compose command to to launch the app in a cont
 docker-compose up
 ```
 
-# Mongo DB integration
+## Mongo DB integration
 Mongo DB data persistence/storage is now added to this app. To use Mongo DB add the below to `.env` file or to environment variables (to use trello stoarge set `STORAGE_TYPE=TRELLO`)
 `DEFAULT_DB` is set to the db that holds data for the app. Associated collections for this DB are `not_started`, `in_progress` and `completed`
 
@@ -139,3 +139,13 @@ MONGO_PASSWORD=<appropriate password>
 MONGO_URL=<appropriate mongo db url> (e.g. cluster0.jvv1n.mongodb.net)
 DEFAULT_DB=<appropriate database>
  ```
+
+## Github Authentication and User Roles
+A hard coded mapping `USER_ROLES` was added in `user.py` file (like below). To test this with your Github user  details you'd have to modify this mapping with your details appropriately
+
+```python
+USER_ROLES = [
+        {'login': 'kogoe1', 'id': '73077410', 'role': Roles.WRITER},
+        {'login': 'kofi', 'id': '73077500', 'role': Roles.READER}
+    ]
+```    

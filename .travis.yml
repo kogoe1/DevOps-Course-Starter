@@ -8,7 +8,7 @@ before_install:
 script:
 - docker run todo_test_image todo_app/tests/test_view_model.py
 - docker run --env-file=.env.test --env STORAGE_TYPE=TRELLO --env LOGIN_DISABLED=True todo_test_image todo_app/tests/test_integration.py
-- docker run --env SECRET_KEY=$SECRET_KEY --env STORAGE_TYPE=MONGO --env MONGO_USERNAME=$MONGO_USERNAME --env MONGO_PASSWORD=$MONGO_PASSWORD --env MONGO_URL=$MONGO_URL --env DEFAULT_DB=test_todo_db --env LOGIN_DISABLED=True todo_test_image todo_app/tests_e2e/test_selenium_mongo.py
+#- docker run --env SECRET_KEY=$SECRET_KEY --env STORAGE_TYPE=MONGO --env MONGO_USERNAME=$MONGO_USERNAME --env MONGO_PASSWORD=$MONGO_PASSWORD --env MONGO_URL=$MONGO_URL --env DEFAULT_DB=test_todo_db --env LOGIN_DISABLED=True todo_test_image todo_app/tests_e2e/test_selenium_mongo.py
 
 
 # Push production image to dockerhub

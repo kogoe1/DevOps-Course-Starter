@@ -24,8 +24,7 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 def test_app():
 
     file_path = find_dotenv('.env')
-    # load_dotenv(file_path, override=True)
-    load_dotenv(file_path)
+    load_dotenv(file_path, override=True)
 
     # Use a test db
     os.environ['DEFAULT_DB'] = 'test_todo_db'

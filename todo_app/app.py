@@ -124,9 +124,10 @@ def create_app():
         # Default to Read Only Template 
         template_html = 'index_ro.html'
     
-        user_role =  current_user.get_role()   
-        if user_role == Roles.WRITER:    
-            template_html = 'index.html'
+        if  not current_user.is_anonymous:
+            user_role =  current_user.get_role()   
+            if user_role == Roles.WRITER:    
+                template_html = 'index.html'
                 
         return render_template(template_html, view_model=item_view_model, form=form)
 

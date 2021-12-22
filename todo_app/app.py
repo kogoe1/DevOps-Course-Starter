@@ -1,5 +1,5 @@
 
-import flask_login
+from functools import wraps
 from todo_app.data.model import ViewModel
 from flask import Flask, render_template, redirect, request
 # from todo_app.flask_config import Config, TrelloConfig
@@ -112,6 +112,23 @@ def create_app():
     def taskSort(item):
             return item.status
 
+    def is_writer(current_user) -> bool:        
+        if not current_user.is_anonymous:
+            return current_user.get_role() == Roles.WRITER
+
+        return False
+
+    # Decorator to check that user has writer privilege
+    def writer_role_required(func):
+
+        @wraps(func)
+        def decorated_view(*args, **kwargs):
+            if is_writer(current_user):
+                return func(*args, **kwargs)
+            return "User NOT permited for this action", 400
+        return decorated_view                      
+
+
     @app.route('/', methods=['GET'])
     @login_required
     def index():
@@ -123,17 +140,15 @@ def create_app():
 
         # Default to Read Only Template 
         template_html = 'index_ro.html'
-    
-        if  not current_user.is_anonymous:
-            user_role =  current_user.get_role()   
-            if user_role == Roles.WRITER:    
-                template_html = 'index.html'
+
+        if is_writer(current_user):
+            template_html = 'index.html'
                 
         return render_template(template_html, view_model=item_view_model, form=form)
 
 
     @app.route('/', methods=['POST'])
-    @login_required
+    @writer_role_required
     def index_form():
         form = TodoForm()
         if form.validate_on_submit():
@@ -142,26 +157,31 @@ def create_app():
             storage_utility.add_item(title, description)
 
         return redirect('/')            
-
+   
+    
     @app.route('/in_progress/<id>', methods=['GET'])
+    @writer_role_required
     def in_progress(id):
         storage_utility.update_item(id, ItemStatus.IN_PROGRESS)
-
         return redirect ('/')
+   
 
     @app.route('/complete/<id>', methods=['GET'])
+    @writer_role_required
     def completed(id):
         storage_utility.update_item(id, ItemStatus.COMPLETED)
 
         return redirect ('/')
 
     @app.route('/not_started/<id>', methods=['GET'])
+    @writer_role_required
     def not_started(id):
         storage_utility.update_item(id, ItemStatus.NOT_STARTED)
 
         return redirect ('/')
 
     @app.route('/remove/<id>', methods=['GET'])
+    @writer_role_required
     def remove_task(id):
         storage_utility.delete_item(id)
 

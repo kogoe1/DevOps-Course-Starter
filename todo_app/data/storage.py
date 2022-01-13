@@ -17,6 +17,8 @@ class Storage:
             return trello_util
         elif storage_type == 'MONGO':
             return Storage.getMongoUtility()
+        elif storage_type == 'AZURE_MONGO':
+            return Storage.getAzureMongoUtility()
         else:
             # Default to MongoDB
             return Storage.getMongoUtility()
@@ -30,5 +32,16 @@ class Storage:
         default_db = os.environ.get('DEFAULT_DB')
 
         mongoUtility =  MongoDbUtility(username, password, mongo_url, default_db)
+        return mongoUtility    
+    
+
+    @staticmethod
+    def getAzureMongoUtility():
+        URL = os.environ.get('AZURE_MONGO_URL')
+        DEFAULT_DB = os.environ.get('AZURE_MONGO_DB')
+        URL_OPTIONS = os.environ.get('AZURE_MONGO_URL_OPTIONS')
+        URI = URL + DEFAULT_DB + URL_OPTIONS
+        mongoUtility =  MongoDbUtility(URI)
+
         return mongoUtility    
 

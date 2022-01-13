@@ -14,6 +14,11 @@ class MongoDbUtility(StorageUtilityInterface):
         self.db = self.client.get_default_database()
         pass
 
+    def __init__(self, uri) -> None:
+        super().__init__()
+        self.client = pymongo.MongoClient(uri)
+        self.db = self.client.get_default_database()
+
 
     def get_items(self):
         items = []

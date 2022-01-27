@@ -18,5 +18,6 @@ deploy:
   provider: script
   script: bash docker_push
   on:
-    branch: master
+    branch: exercise-11 
+    #Change branch back to master
 

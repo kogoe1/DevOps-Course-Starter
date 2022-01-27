@@ -53,7 +53,8 @@ def create_app():
         # Prepare and send a request to get tokens
         token_url, headers, body = client.prepare_token_request(
             TOKEN_ENDPOINT,
-            authorization_response=request.url,
+            # authorization_response=request.url,
+            authorization_response=request.base_url,
             redirect_url=request.base_url,
             code=code
         )

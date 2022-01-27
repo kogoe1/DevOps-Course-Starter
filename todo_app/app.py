@@ -54,7 +54,7 @@ def create_app():
         token_url, headers, body = client.prepare_token_request(
             TOKEN_ENDPOINT,
             # authorization_response=request.url,
-            authorization_response=request.base_url,
+            authorization_response='https://kogoetodo.azurewebsites.net' + request.get_full_path(),
             redirect_url=request.base_url,
             code=code
         )

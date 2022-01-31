@@ -40,7 +40,7 @@ def create_app():
     def login():
         request_uri =  client.prepare_request_uri(
             OAUTH_URL,
-            redirect_uri=request.base_url + "/callback"
+            redirect_uri=request.base_url + "/login/callback"
         )
 
         return redirect(request_uri)        

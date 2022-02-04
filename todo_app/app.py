@@ -66,7 +66,8 @@ def create_app():
         base_url = get_secure_url(request)
         token_url, headers, body = client.prepare_token_request(
             TOKEN_ENDPOINT,
-            authorization_response=request.url,
+            # authorization_response=request.url,
+            authorization_response = base_url,
             redirect_url = base_url,
             code = code
         )

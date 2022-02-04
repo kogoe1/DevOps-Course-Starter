@@ -1,5 +1,6 @@
 
 from functools import wraps
+from posixpath import split
 from todo_app.data.model import ViewModel
 from flask import Flask, render_template, redirect, request
 # from todo_app.flask_config import Config, TrelloConfig
@@ -38,9 +39,16 @@ def create_app():
 
     @app.route('/login', methods=['GET'])
     def login():
+        # Adding this to resolve OAuth bug that only returns http
+        base_url = request.base_url 
+        url_components = base_url.split(':')
+        protocol = url_components[0]
+        if protocol != 'https':
+            base_url = "https:" + url_components[1]
+           
         request_uri =  client.prepare_request_uri(
             OAUTH_URL,
-            # redirect_uri=request.base_url + "/login/callback"
+            redirect_uri = base_url + "/login/callback"
         )
 
         return redirect(request_uri)        
@@ -54,7 +62,6 @@ def create_app():
         token_url, headers, body = client.prepare_token_request(
             TOKEN_ENDPOINT,
             authorization_response=request.url,
-            # authorization_response='https://kogoetodo.azurewebsites.net' + request.get_full_path(),
             redirect_url=request.base_url,
             code=code
         )

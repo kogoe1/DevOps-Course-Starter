@@ -46,6 +46,15 @@ def create_app():
 
         return base_url    
 
+    def get_secure_request_url(request):
+        request_url = request.url 
+        url_components = request_url.split(':')
+        protocol = url_components[0]
+        if protocol != 'https':
+            request_url = "https:" + url_components[1]
+
+        return request_url    
+
     @app.route('/login', methods=['GET'])
     def login():
         base_url = get_secure_url(request)    
@@ -64,10 +73,11 @@ def create_app():
 
         # Prepare and send a request to get tokens
         base_url = get_secure_url(request)
+        request_url = get_secure_request_url(request)
         token_url, headers, body = client.prepare_token_request(
             TOKEN_ENDPOINT,
             # authorization_response=request.url,
-            authorization_response = base_url,
+            authorization_response = request_url,
             redirect_url = base_url,
             code = code
         )

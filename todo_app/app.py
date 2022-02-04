@@ -36,15 +36,19 @@ def create_app():
 
     client = WebApplicationClient(CLIENT_ID)
 
-
-    @app.route('/login', methods=['GET'])
-    def login():
-        # Adding this to resolve OAuth bug that only returns http
+    # Adding this to resolve OAuth bug that only returns http (instead of https)
+    def get_secure_url(request):
         base_url = request.base_url 
         url_components = base_url.split(':')
         protocol = url_components[0]
         if protocol != 'https':
             base_url = "https:" + url_components[1]
+
+        return base_url    
+
+    @app.route('/login', methods=['GET'])
+    def login():
+        base_url = get_secure_url(request)    
            
         request_uri =  client.prepare_request_uri(
             OAUTH_URL,
@@ -59,18 +63,19 @@ def create_app():
         code = request.args.get('code')
 
         # Prepare and send a request to get tokens
+        base_url = get_secure_url(request)
         token_url, headers, body = client.prepare_token_request(
             TOKEN_ENDPOINT,
             authorization_response=request.url,
-            redirect_url=request.base_url,
-            code=code
+            redirect_url = base_url,
+            code = code
         )
         headers['Accept']='application/json'
         token_response = requests.post(
             token_url,
-            headers=headers,
-            data=body,
-            auth=(CLIENT_ID, CLIENT_SECRET)
+            headers = headers,
+            data = body,
+            auth = (CLIENT_ID, CLIENT_SECRET)
         )
 
         # Parse the tokens!

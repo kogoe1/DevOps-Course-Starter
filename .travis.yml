@@ -16,7 +16,9 @@ language: generic
 deploy: 
   skip_cleanup: true
   provider: script
-  script: bash docker_push
+  script: 
+    - bash docker_push
+    - bash webhook.sh
   on:
     branch: exercise-11 
     #Change branch back to master

@@ -37,32 +37,23 @@ def create_app():
     client = WebApplicationClient(CLIENT_ID)
 
     # Adding this to resolve OAuth bug that only returns http (instead of https)
-    def get_secure_url(request):
-        base_url = request.base_url 
-        url_components = base_url.split(':')
+    def get_secure_url(source_url):
+        secure_url = source_url 
+        url_components = secure_url.split(':')
         protocol = url_components[0]
         if protocol != 'https':
-            base_url = "https:" + url_components[1]
+            secure_url = "https:" + url_components[1]
 
-        return base_url    
+        return secure_url    
 
-    def get_secure_request_url(request):
-        request_url = request.url 
-        url_components = request_url.split(':')
-        protocol = url_components[0]
-        if protocol != 'https':
-            request_url = "https:" + url_components[1]
-
-        return request_url    
 
     @app.route('/login', methods=['GET'])
     def login():
-        base_url = get_secure_url(request)    
+        base_url = get_secure_url(request.base_url)    
            
         request_uri =  client.prepare_request_uri(
             OAUTH_URL,
             redirect_uri = base_url + "/login/callback"
-            # redirect_uri = base_url + "/callback"
         )
 
         return redirect(request_uri)        
@@ -73,11 +64,10 @@ def create_app():
         code = request.args.get('code')
 
         # Prepare and send a request to get tokens
-        base_url = get_secure_url(request)
-        request_url = get_secure_request_url(request)
+        base_url = get_secure_url(request.base_url)
+        request_url = get_secure_url(request.url)
         token_url, headers, body = client.prepare_token_request(
             TOKEN_ENDPOINT,
-            # authorization_response=request.url,
             authorization_response = request_url,
             redirect_url = base_url,
             code = code

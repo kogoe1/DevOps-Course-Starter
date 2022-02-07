@@ -61,8 +61,8 @@ def create_app():
            
         request_uri =  client.prepare_request_uri(
             OAUTH_URL,
-            # redirect_uri = base_url + "/login/callback"
-            redirect_uri = base_url + "/callback"
+            redirect_uri = base_url + "/login/callback"
+            # redirect_uri = base_url + "/callback"
         )
 
         return redirect(request_uri)        
